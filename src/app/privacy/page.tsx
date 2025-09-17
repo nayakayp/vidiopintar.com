@@ -1,6 +1,7 @@
-import { HeroHeader } from "@/components/hero-header";
 import { FooterSection } from "@/components/footer";
+import { HeroHeader } from "@/components/hero-header";
 import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
 
 export default function PrivacyPolicy() {
   return (
@@ -18,7 +19,7 @@ export default function PrivacyPolicy() {
               </p>
 
               <div className="prose prose-gray dark:prose-invert max-w-none space-y-8">
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
                     <p className="text-muted-foreground">
@@ -27,7 +28,7 @@ export default function PrivacyPolicy() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">Information We Collect</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -60,7 +61,7 @@ export default function PrivacyPolicy() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">How We Use Your Information</h2>
                     <div className="space-y-3 text-muted-foreground">
@@ -78,7 +79,7 @@ export default function PrivacyPolicy() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">Data Storage and Security</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -96,7 +97,7 @@ export default function PrivacyPolicy() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">Data Sharing and Third Parties</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -111,7 +112,7 @@ export default function PrivacyPolicy() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">Your Rights and Choices</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -130,7 +131,7 @@ export default function PrivacyPolicy() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">Cookies and Tracking</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -149,7 +150,7 @@ export default function PrivacyPolicy() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">Children's Privacy</h2>
                     <p className="text-muted-foreground">
@@ -158,7 +159,7 @@ export default function PrivacyPolicy() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">Changes to This Policy</h2>
                     <p className="text-muted-foreground">
@@ -167,7 +168,7 @@ export default function PrivacyPolicy() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
                     <div className="space-y-3 text-muted-foreground">
@@ -175,8 +176,8 @@ export default function PrivacyPolicy() {
                         If you have any questions about this Privacy Policy or our data practices, please contact us:
                       </p>
                       <div>
-                        <p>Email: support@vidiopintar.com</p>
-                        <p>Website: vidiopintar.com</p>
+                        <p>Email: <Link href="mailto:support@vidiopintar.com">support@vidiopintar.com</Link></p>
+                        <p>Website: <Link href="https://vidiopintar.com">vidiopintar.com</Link></p>
                       </div>
                     </div>
                   </CardContent>

@@ -1,6 +1,7 @@
 import { HeroHeader } from "@/components/hero-header";
 import { FooterSection } from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
 
 export default function TermsOfService() {
   return (
@@ -18,7 +19,7 @@ export default function TermsOfService() {
               </p>
 
               <div className="prose prose-gray dark:prose-invert max-w-none space-y-8">
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">1. Acceptance of Terms</h2>
                     <p className="text-muted-foreground">
@@ -27,7 +28,7 @@ export default function TermsOfService() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">2. Description of Service</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -45,7 +46,7 @@ export default function TermsOfService() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">3. User Accounts</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -64,7 +65,7 @@ export default function TermsOfService() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">4. Acceptable Use Policy</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -83,7 +84,7 @@ export default function TermsOfService() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">5. Content Ownership and License</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -109,7 +110,7 @@ export default function TermsOfService() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">6. Payment and Billing</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -137,7 +138,7 @@ export default function TermsOfService() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">7. Service Limitations</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -156,7 +157,7 @@ export default function TermsOfService() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">8. Privacy and Data Protection</h2>
                     <p className="text-muted-foreground">
@@ -165,7 +166,7 @@ export default function TermsOfService() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">9. Disclaimers and Warranties</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -188,7 +189,7 @@ export default function TermsOfService() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">10. Limitation of Liability</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -211,7 +212,7 @@ export default function TermsOfService() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">11. Indemnification</h2>
                     <p className="text-muted-foreground">
@@ -220,7 +221,7 @@ export default function TermsOfService() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">12. Termination</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -239,7 +240,7 @@ export default function TermsOfService() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">13. Governing Law and Disputes</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -261,7 +262,7 @@ export default function TermsOfService() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">14. General Provisions</h2>
                     <div className="space-y-4 text-muted-foreground">
@@ -276,7 +277,7 @@ export default function TermsOfService() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-none shadow-none p-0">
+                <Card className="border-none shadow-none bg-transparent p-0">
                   <CardContent className="p-0">
                     <h2 className="text-2xl font-semibold mb-4">15. Contact Information</h2>
                     <div className="space-y-3 text-muted-foreground">
@@ -284,9 +285,9 @@ export default function TermsOfService() {
                         For questions about these Terms of Service, please contact us:
                       </p>
                       <div>
-                        <p>Email: legal@vidiopintar.com</p>
-                        <p>Website: vidiopintar.com</p>
-                        <p>Support: support@vidiopintar.com</p>
+                        <p>Email: <Link href="mailto:legal@vidiopintar.com">legal@vidiopintar.com</Link></p>
+                        <p>Website: <Link href="https://vidiopintar.com">vidiopintar.com</Link></p>
+                        <p>Support: <Link href="mailto:support@vidiopintar.com">support@vidiopintar.com</Link></p>
                       </div>
                     </div>
                   </CardContent>
