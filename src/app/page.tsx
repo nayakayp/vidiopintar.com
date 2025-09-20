@@ -34,23 +34,25 @@ export default async function Page() {
                 </Button>
               </a>
             ) : (
-              <a href="/login">
-                <Button
-                  variant="ghost"
-                  className="cursor-pointer active:scale-[0.975]"
-                >
-                  Login
-                </Button>
-              </a>
+              <>
+                <a href="/login">
+                  <Button
+                    variant="ghost"
+                    className="cursor-pointer active:scale-[0.975]"
+                  >
+                    Login
+                  </Button>
+                </a>
+                <a href="https://vidiopintar.com/register">
+                  <Button
+                    variant="outline"
+                    className="rounded-full dark:border-accent cursor-pointer transition active:scale-[0.975]"
+                  >
+                    Get Started
+                  </Button>
+                </a>
+              </>
             )}
-            <a href="https://vidiopintar.com/register">
-              <Button
-                variant="outline"
-                className="rounded-full dark:border-accent cursor-pointer transition active:scale-[0.975]"
-              >
-                Get Started
-              </Button>
-            </a>
           </div>
         </nav>
         <Header />
