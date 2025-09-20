@@ -27,7 +27,7 @@ export default async function Page() {
             {session ? (
               <a href="/home">
                 <Button
-                  variant="ghost"
+                  variant="outline"
                   className="cursor-pointer active:scale-[0.975]"
                 >
                   Home
