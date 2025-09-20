@@ -29,11 +29,11 @@ const footers = [
   },
 ]
 
-export function Footer() {
+export function Footer({ cta }: { cta?: boolean }) {
   return (
     <div>
       {/* call to action */}
-      <CallToAction />
+      {cta && <CallToAction />}
 
       {/* footer */}
       <div className="flex justify-between items-center w-full py-8 px-2 flex-col sm:flex-row gap-8">
