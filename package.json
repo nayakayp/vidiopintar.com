@@ -17,7 +17,6 @@
     "@ai-sdk/google": "^1.2.12",
     "@ai-sdk/openai": "^1.2.5",
     "@effect/platform": "^0.85.2",
-    "@effect/platform-node": "^0.86.4",
     "@radix-ui/react-alert-dialog": "^1.1.10",
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-dialog": "^1.1.14",
