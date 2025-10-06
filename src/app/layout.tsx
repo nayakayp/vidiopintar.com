@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vidiopintar - Turn YouTube into Your Personal Learning Academy",
+  title: "Vidiopintar - Learn anything from YouTube with AI!",
   description: "Learn from YouTube videos with ai chat, note-taking, and quizz",
 }
 
