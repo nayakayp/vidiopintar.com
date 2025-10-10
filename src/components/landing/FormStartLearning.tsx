@@ -20,7 +20,7 @@ export function ButtonSubmitStartLearning({ isSubmitting }: { isSubmitting: bool
             disabled={isSubmitting}
             className="cursor-pointer absolute right-2 top-1/2 -translate-y-1/2 rounded-sm bg-slate-900 hover:bg-slate-900/90 active:scale-[0.975]"
         >
-            {isSubmitting ? <Loader className="size-4 animate-spin dark:text-white" /> : <ArrowUp className="h-5 w-5 text-white size-5" />}
+            {isSubmitting ? <Loader className="size-4 animate-spin dark:text-white" /> : <ArrowUp className="text-white size-4" />}
         </Button>
     );
 }
