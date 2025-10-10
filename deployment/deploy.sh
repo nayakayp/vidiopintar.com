@@ -201,8 +201,7 @@ if health_check "$TARGET_PORT"; then
         
         log "Previous container on port $ACTIVE_PORT has been removed"
     fi
-    
-    # Show container status
+
     log "Container status:"
     docker ps --filter "name=${CONTAINER_NAME}" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
     
