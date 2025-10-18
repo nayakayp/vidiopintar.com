@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Loader, AlertTriangle, Crown } from "lucide-react";
 import { PromptInput, PromptInputTextarea, PromptInputActions } from "@/components/ui/prompt-input";
@@ -10,6 +11,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import Link from "next/link";
 
 export function VideoSubmitForm() {
+  const router = useRouter();
   const [input, setInput] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
@@ -59,16 +61,19 @@ export function VideoSubmitForm() {
       
       // Success - redirect to video page
       if (result.videoId) {
-        window.location.href = `/video/${result.videoId}`;
+        // Use Next.js router for smooth client-side navigation
+        router.push(`/video/${result.videoId}`);
+        // Keep loading state active during navigation
+        // Don't set isSubmitting to false here - let it show until page loads
       } else {
         toast.success("Video submitted successfully!");
         setInput("");
+        setIsSubmitting(false);
       }
-      
+
     } catch (error) {
       console.error('Submit error:', error);
       setErrors(['Network error. Please try again.']);
-    } finally {
       setIsSubmitting(false);
     }
   };
