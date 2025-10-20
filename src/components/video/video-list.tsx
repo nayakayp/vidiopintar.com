@@ -38,14 +38,14 @@ export function VideoList({ videos }: VideoListProps) {
                                         className="object-cover w-full h-40"
                                     />
                                     <button
-                                        className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-white text-white p-1 rounded-lg z-10 cursor-pointer hover:text-red-500/80"
+                                        className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-white text-white dark:text-black p-1 rounded-lg z-10 cursor-pointer hover:text-red-500/80"
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             e.preventDefault();
                                             openDialog(video.userVideoId);
                                         }}
                                     >
-                                        <Trash2 className="size-4 text-foreground dark:text-primary" />
+                                        <Trash2 className="size-4 text-foreground" />
                                     </button>
                                 </CardContent>
                                 <CardHeader className="p-4">
