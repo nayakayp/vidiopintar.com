@@ -45,7 +45,7 @@ export function VideoList({ videos }: VideoListProps) {
                                                 openDialog(video.userVideoId);
                                             }}
                                         >
-                                            <Trash2 className="size-4 text-foreground" />
+                                            <Trash2 className="size-4 text-foreground dark:text-primary" />
                                         </button>
                                     </CardContent>
                                     <CardHeader className="p-4">
