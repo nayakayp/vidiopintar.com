@@ -11,7 +11,7 @@ AI-powered YouTube video learning platform. Submit a YouTube link to get video s
 - **Frontend**: Next.js 14, React 18, TypeScript, Tailwind CSS
 - **Database**: PostgreSQL with Drizzle ORM
 - **Auth**: Better Auth
-- **AI**: OpenAI & Google AI SDK
+- **AI**: Google AI SDK (Gemini models)
 
 ## Quick Start
 
@@ -30,7 +30,6 @@ npm run dev
 
 Copy `.env.example` to `.env.local` and configure:
 - Database connection
-- OpenAI API key
 - Google AI API key
 - Auth secrets
 

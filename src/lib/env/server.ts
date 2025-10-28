@@ -1,6 +1,6 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
-import 'dotenv/config';
+import "dotenv/config";
 
 export const env = createEnv({
   server: {
@@ -18,6 +18,8 @@ export const env = createEnv({
     GOOGLE_CLIENT_SECRET: z.string().min(1),
     BETTER_AUTH_URL: z.string().min(1),
     ADMIN_MASTER_EMAIL: z.string().email(),
+    GOOGLE_GENERATIVE_AI_BASE_URL: z.string().min(1),
+    GOOGLE_GENERATIVE_AI_API_KEY: z.string().min(1),
   },
   emptyStringAsUndefined: true,
   experimental__runtimeEnv: process.env,

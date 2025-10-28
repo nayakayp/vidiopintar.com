@@ -1,12 +1,12 @@
 import { env } from "@/lib/env/server";
 import { VideoRepository, TranscriptRepository, Video, UserRepository } from "@/lib/db/repository";
-import { openai } from '@ai-sdk/openai';
 import { generateObject } from 'ai';
 import { z } from 'zod';
 import { generateSummary } from "@/lib/ai/summary";
 import { getQuickStartPrompt } from "@/lib/ai/system-prompts";
 import { formatTime } from "@/lib/utils";
 import { trackGenerateTextUsage } from '@/lib/token-tracker';
+import { googleAI, AI_MODELS } from '@/lib/ai/config';
 
 import { UserVideoRepository } from "@/lib/db/repository";
 import { getCurrentUser } from "./auth";
@@ -423,9 +423,8 @@ ${summary}
 `;
 
   const startTime = Date.now();
-  const modelName = 'gpt-4o-mini-2024-07-18';
   const result = await generateObject({
-    model: openai(modelName),
+    model: googleAI(AI_MODELS.lite),
     prompt: prompt,
     schema: z.object({
       questions: z.array(z.string()),
@@ -437,8 +436,8 @@ ${summary}
     const user = await getCurrentUser();
     await trackGenerateTextUsage(result, {
       userId: user.id,
-      model: modelName,
-      provider: 'openai',
+      model: AI_MODELS.lite,
+      provider: 'google',
       operation: 'quick_start_questions',
       videoId,
       userVideoId,

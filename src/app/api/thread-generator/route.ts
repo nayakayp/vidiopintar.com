@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { google } from '@ai-sdk/google';
 import { generateObject } from 'ai';
 import { z } from 'zod';
 import { getCurrentUser } from "@/lib/auth";
 import { trackGenerateTextUsage } from '@/lib/token-tracker';
 import { extractVideoId } from "@/lib/utils";
 import { env } from "@/lib/env/server";
+import { googleAI, AI_MODELS } from '@/lib/ai/config';
 
 const systemPrompt = `
 You are an expert Twitter content strategist and copywriter specializing in viral thread creation. You understand Twitter's algorithm, audience psychology, and what makes content shareable. Your expertise includes crafting compelling hooks, structuring information for maximum engagement, and optimizing content for Twitter's unique format and character constraints.
@@ -182,10 +182,9 @@ NOTE:
 `;
     
     const startTime = Date.now();
-    const modelName = 'gemini-2.0-flash-001';
-    
+
     const result = await generateObject({
-      model: google(modelName),
+      model: googleAI(AI_MODELS.pro),
       temperature: 0.2,
       messages: [
         {
@@ -204,7 +203,7 @@ NOTE:
     try {
       await trackGenerateTextUsage(result, {
         userId: user.id,
-        model: modelName,
+        model: AI_MODELS.pro,
         provider: 'google',
         operation: 'thread_generator',
         videoId,

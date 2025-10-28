@@ -1,6 +1,5 @@
-import { openai } from '@ai-sdk/openai';
-import { google } from '@ai-sdk/google';
 import { streamText } from 'ai';
+import { googleAI, AI_MODELS } from '@/lib/ai/config';
 
 import { fetchVideoTranscript, fetchVideoDetails } from '@/lib/youtube';
 import { MessageRepository, VideoRepository, UserRepository } from '@/lib/db/repository';
@@ -107,16 +106,15 @@ export async function POST(req: Request) {
 
     const tokenTracker = createStreamTokenTracker({
       userId: user.id,
-      model: 'gpt-4o-mini-2024-07-18',
-      provider: 'openai',
+      model: AI_MODELS.lite,
+      provider: 'google',
       operation: 'chat',
       videoId,
       userVideoId,
     });
 
     const result = streamText({
-      model: openai('gpt-4o-mini-2024-07-18'),
-      // model: google('gemini-2.0-flash-001'),
+      model: googleAI(AI_MODELS.lite),
       messages: enrichedMessages,
       onFinish: async (data) => {
         // Save assistant messages
