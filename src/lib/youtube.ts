@@ -55,19 +55,52 @@ export async function generateUserVideoSummary(video: Video, segments: any[], us
 
 async function getVideoDetailFromApi(videoId: string) {
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`
-  const encodedUrl = encodeURIComponent(videoUrl)
-  const response = await fetch(`${env.API_BASE_URL}/youtube/video?videoUrl=${encodedUrl}`, {
+  const response = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(videoUrl)}&format=json`, {
     headers: {
-      'X-API-Key': env.API_X_HEADER_API_KEY,
+      'Accept': 'application/json',
     },
   })
-  
+
   if (!response.ok) {
     throw new Error(`Failed to fetch video details: ${response.status} ${response.statusText}`)
   }
-  
+
   const data = await response.json()
-  return data;
+
+  // Convert oEmbed response to match expected format
+  return {
+    title: data.title,
+    description: '', // oEmbed doesn't provide description
+    channelTitle: data.author_name,
+    publishedAt: null, // oEmbed doesn't provide publish date
+    thumbnails: {
+      default: {
+        url: data.thumbnail_url,
+        width: data.thumbnail_width,
+        height: data.thumbnail_height,
+      },
+      medium: {
+        url: data.thumbnail_url,
+        width: data.thumbnail_width,
+        height: data.thumbnail_height,
+      },
+      high: {
+        url: data.thumbnail_url,
+        width: data.thumbnail_width,
+        height: data.thumbnail_height,
+      },
+      maxres: {
+        url: data.thumbnail_url,
+        width: data.thumbnail_width,
+        height: data.thumbnail_height,
+      },
+      standard: {
+        url: data.thumbnail_url,
+        width: data.thumbnail_width,
+        height: data.thumbnail_height,
+      }
+    }
+  }
 }
 
 export async function fetchVideoDetails(videoId: string) {
@@ -107,19 +140,54 @@ export async function fetchVideoDetails(videoId: string) {
     }
 
     const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-    const encodedUrl = encodeURIComponent(videoUrl);
-    
-    const response = await fetch(`${env.API_BASE_URL}/youtube/video?videoUrl=${encodedUrl}`, {
+
+    const response = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(videoUrl)}&format=json`, {
       headers: {
-        'X-API-Key': env.API_X_HEADER_API_KEY,
+        'Accept': 'application/json',
       },
     });
-    
+
     if (!response.ok) {
       throw new Error(`Failed to fetch video details: ${response.status} ${response.statusText}`);
     }
-    
-    const data = await response.json();
+
+    const oembedData = await response.json();
+
+    // Convert oEmbed response to match expected format
+    const data = {
+      title: oembedData.title,
+      description: '', // oEmbed doesn't provide description
+      channelTitle: oembedData.author_name,
+      publishedAt: null, // oEmbed doesn't provide publish date
+      thumbnails: {
+        default: {
+          url: oembedData.thumbnail_url,
+          width: oembedData.thumbnail_width,
+          height: oembedData.thumbnail_height,
+        },
+        medium: {
+          url: oembedData.thumbnail_url,
+          width: oembedData.thumbnail_width,
+          height: oembedData.thumbnail_height,
+        },
+        high: {
+          url: oembedData.thumbnail_url,
+          width: oembedData.thumbnail_width,
+          height: oembedData.thumbnail_height,
+        },
+        maxres: {
+          url: oembedData.thumbnail_url,
+          width: oembedData.thumbnail_width,
+          height: oembedData.thumbnail_height,
+        },
+        standard: {
+          url: oembedData.thumbnail_url,
+          width: oembedData.thumbnail_width,
+          height: oembedData.thumbnail_height,
+        }
+      },
+      tags: [], // oEmbed doesn't provide tags
+    };
 
     await VideoRepository.upsert({
       youtubeId: videoId,

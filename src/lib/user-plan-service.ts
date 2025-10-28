@@ -1,7 +1,7 @@
-import { transactionsRepository } from '@/lib/db/repository/transactions';
-import { UserVideoRepository } from '@/lib/db/repository';
+import { transactionsRepository } from "@/lib/db/repository/transactions";
+import { UserVideoRepository } from "@/lib/db/repository";
 
-export type UserPlan = 'free' | 'monthly' | 'yearly';
+export type UserPlan = "free" | "monthly" | "yearly";
 
 export interface PlanLimits {
   videosPerDay: number;
@@ -10,7 +10,7 @@ export interface PlanLimits {
 
 const PLAN_LIMITS: Record<UserPlan, PlanLimits> = {
   free: {
-    videosPerDay: 2,
+    videosPerDay: 100,
     unlimited: false,
   },
   monthly: {
@@ -29,27 +29,32 @@ export class UserPlanService {
    */
   static async getCurrentPlan(userId: string): Promise<UserPlan> {
     // Check for active subscription transactions
-    const confirmedTransaction = await transactionsRepository.getRecentTransactionsByUserId(
-      userId, 
-      365 * 24 * 60 * 60 * 1000 // 365 days in milliseconds to cover yearly plans
-    );
+    const confirmedTransaction =
+      await transactionsRepository.getRecentTransactionsByUserId(
+        userId,
+        365 * 24 * 60 * 60 * 1000, // 365 days in milliseconds to cover yearly plans
+      );
 
     // Find the most recent confirmed transaction within subscription period
-    const activeTransaction = confirmedTransaction.find(tx => {
-      if (tx.status !== 'confirmed' || !tx.confirmedAt) return false;
-      
+    const activeTransaction = confirmedTransaction.find((tx) => {
+      if (tx.status !== "confirmed" || !tx.confirmedAt) return false;
+
       const confirmedDate = new Date(tx.confirmedAt);
       const now = new Date();
-      
+
       // Check if subscription is still active based on plan type
-      if (tx.planType === 'monthly') {
-        const expiry = new Date(confirmedDate.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 days
+      if (tx.planType === "monthly") {
+        const expiry = new Date(
+          confirmedDate.getTime() + 30 * 24 * 60 * 60 * 1000,
+        ); // 30 days
         return now <= expiry;
-      } else if (tx.planType === 'yearly') {
-        const expiry = new Date(confirmedDate.getTime() + 365 * 24 * 60 * 60 * 1000); // 365 days
+      } else if (tx.planType === "yearly") {
+        const expiry = new Date(
+          confirmedDate.getTime() + 365 * 24 * 60 * 60 * 1000,
+        ); // 365 days
         return now <= expiry;
       }
-      
+
       return false;
     });
 
@@ -57,7 +62,7 @@ export class UserPlanService {
       return activeTransaction.planType as UserPlan;
     }
 
-    return 'free';
+    return "free";
   }
 
   /**
@@ -96,7 +101,7 @@ export class UserPlanService {
 
     // Count videos added today
     const userVideos = await UserVideoRepository.getAllByUser(userId);
-    const videosToday = userVideos.filter(video => {
+    const videosToday = userVideos.filter((video) => {
       const videoDate = new Date(video.createdAt);
       return videoDate >= today && videoDate < tomorrow;
     });
@@ -108,7 +113,7 @@ export class UserPlanService {
       return {
         canAdd: false,
         currentPlan,
-        reason: 'daily_limit_reached',
+        reason: "daily_limit_reached",
         videosUsedToday,
         dailyLimit,
       };
@@ -145,7 +150,7 @@ export class UserPlanService {
     tomorrow.setDate(tomorrow.getDate() + 1);
 
     const userVideos = await UserVideoRepository.getAllByUser(userId);
-    const videosToday = userVideos.filter(video => {
+    const videosToday = userVideos.filter((video) => {
       const videoDate = new Date(video.createdAt);
       return videoDate >= today && videoDate < tomorrow;
     });
@@ -161,45 +166,59 @@ export class UserPlanService {
   /**
    * Check if user has an active subscription for a specific plan type
    */
-  static async hasActiveSubscription(userId: string, planType: UserPlan): Promise<{
+  static async hasActiveSubscription(
+    userId: string,
+    planType: UserPlan,
+  ): Promise<{
     hasActive: boolean;
     expiresAt?: Date;
     transaction?: any;
   }> {
-    if (planType === 'free') {
+    if (planType === "free") {
       return { hasActive: false };
     }
 
     // Get recent transactions to check for active subscriptions
-    const recentTransactions = await transactionsRepository.getRecentTransactionsByUserId(
-      userId, 
-      365 * 24 * 60 * 60 * 1000 // 1 year in milliseconds to cover yearly plans
-    );
+    const recentTransactions =
+      await transactionsRepository.getRecentTransactionsByUserId(
+        userId,
+        365 * 24 * 60 * 60 * 1000, // 1 year in milliseconds to cover yearly plans
+      );
 
     // Find active subscription for the specific plan type
-    const activeTransaction = recentTransactions.find(tx => {
-      if (tx.status !== 'confirmed' || !tx.confirmedAt || tx.planType !== planType) return false;
-      
+    const activeTransaction = recentTransactions.find((tx) => {
+      if (
+        tx.status !== "confirmed" ||
+        !tx.confirmedAt ||
+        tx.planType !== planType
+      )
+        return false;
+
       const confirmedDate = new Date(tx.confirmedAt);
       const now = new Date();
-      
+
       // Check if subscription is still active based on plan type
-      if (tx.planType === 'monthly') {
-        const expiry = new Date(confirmedDate.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 days
+      if (tx.planType === "monthly") {
+        const expiry = new Date(
+          confirmedDate.getTime() + 30 * 24 * 60 * 60 * 1000,
+        ); // 30 days
         return now <= expiry;
-      } else if (tx.planType === 'yearly') {
-        const expiry = new Date(confirmedDate.getTime() + 365 * 24 * 60 * 60 * 1000); // 365 days
+      } else if (tx.planType === "yearly") {
+        const expiry = new Date(
+          confirmedDate.getTime() + 365 * 24 * 60 * 60 * 1000,
+        ); // 365 days
         return now <= expiry;
       }
-      
+
       return false;
     });
 
     if (activeTransaction) {
       const confirmedDate = new Date(activeTransaction.confirmedAt!);
-      const expiresAt = activeTransaction.planType === 'monthly' 
-        ? new Date(confirmedDate.getTime() + 30 * 24 * 60 * 60 * 1000)
-        : new Date(confirmedDate.getTime() + 365 * 24 * 60 * 60 * 1000);
+      const expiresAt =
+        activeTransaction.planType === "monthly"
+          ? new Date(confirmedDate.getTime() + 30 * 24 * 60 * 60 * 1000)
+          : new Date(confirmedDate.getTime() + 365 * 24 * 60 * 60 * 1000);
 
       return {
         hasActive: true,
@@ -214,7 +233,10 @@ export class UserPlanService {
   /**
    * Check if user can purchase a specific plan
    */
-  static async canPurchasePlan(userId: string, planType: UserPlan): Promise<{
+  static async canPurchasePlan(
+    userId: string,
+    planType: UserPlan,
+  ): Promise<{
     canPurchase: boolean;
     reason?: string;
     activeSubscription?: {
@@ -222,16 +244,19 @@ export class UserPlanService {
       expiresAt: Date;
     };
   }> {
-    if (planType === 'free') {
-      return { canPurchase: false, reason: 'free_plan_cannot_be_purchased' };
+    if (planType === "free") {
+      return { canPurchase: false, reason: "free_plan_cannot_be_purchased" };
     }
 
-    const activeSubscriptionCheck = await this.hasActiveSubscription(userId, planType);
-    
+    const activeSubscriptionCheck = await this.hasActiveSubscription(
+      userId,
+      planType,
+    );
+
     if (activeSubscriptionCheck.hasActive) {
       return {
         canPurchase: false,
-        reason: 'already_have_active_subscription',
+        reason: "already_have_active_subscription",
         activeSubscription: {
           planType,
           expiresAt: activeSubscriptionCheck.expiresAt!,
@@ -242,3 +267,4 @@ export class UserPlanService {
     return { canPurchase: true };
   }
 }
+
