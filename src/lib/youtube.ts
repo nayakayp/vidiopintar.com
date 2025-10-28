@@ -184,46 +184,109 @@ export async function fetchVideoTranscript(videoId: string) {
     }
 
     // No transcript found in database, fetch from API
-
     const videoUrl = `https://www.youtube.com/watch?v=${videoId}`
-    const encodedUrl = encodeURIComponent(videoUrl)
-    const response = await fetch(`${env.API_BASE_URL}/youtube/transcript?videoUrl=${encodedUrl}`, {
-      headers: {
-        'X-API-Key': env.API_X_HEADER_API_KEY,
-      },
-    })
-    
-    if (!response.ok) {
-      throw new Error(`Failed to fetch transcript: ${response.status} ${response.statusText}`)
+
+    // Use TranscriptAPI.com if available, otherwise fall back to original API
+    const useTranscriptApi = env.TRANSCRIPT_API_BASE_URL && env.TRANSCRIPT_API_KEY;
+
+    let response;
+    let data;
+
+    if (useTranscriptApi) {
+      // Use TranscriptAPI.com
+      response = await fetch(`${env.TRANSCRIPT_API_BASE_URL}/api/v2/youtube/transcript?video_url=${videoId}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${env.TRANSCRIPT_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        // Handle specific TranscriptAPI.com errors
+        if (response.status === 401) {
+          throw new Error('Invalid TranscriptAPI.com API key');
+        } else if (response.status === 402) {
+          throw new Error('No TranscriptAPI.com credits remaining');
+        } else if (response.status === 429) {
+          throw new Error('TranscriptAPI.com rate limit exceeded');
+        } else {
+          throw new Error(`Failed to fetch transcript from TranscriptAPI.com: ${response.status} ${response.statusText}`);
+        }
+      }
+
+      data = await response.json();
+    } else {
+      // Fall back to original API
+      const encodedUrl = encodeURIComponent(videoUrl);
+      response = await fetch(`${env.API_BASE_URL}/youtube/transcript?videoUrl=${encodedUrl}`, {
+        headers: {
+          'X-API-Key': env.API_X_HEADER_API_KEY,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch transcript: ${response.status} ${response.statusText}`);
+      }
+
+      data = await response.json();
     }
     
-    const data = await response.json()
-    
-    const segments = data.content.map((item: any, index: number) => {
-      // Convert start and end times from strings to numbers
-      const start = parseInt(item.start, 10) / 1000 // Convert milliseconds to seconds if needed
-      const end = parseInt(item.end, 10) / 1000 // Convert milliseconds to seconds if needed
+    // Handle different response formats based on API used
+    let segments;
 
-      const baseDate = new Date(0)
-      baseDate.setHours(0, 0, 0, 0)
+    if (useTranscriptApi) {
+      // TranscriptAPI.com format: { transcript: [{ text, start, duration }] }
+      segments = data.transcript.map((item: any, index: number) => {
+        const start = item.start; // Already in seconds
+        const end = item.start + item.duration; // Calculate end time
 
-      const startTime = addSeconds(baseDate, Number(start))
-      const endTime = addSeconds(baseDate, Number(end))
-      
-      // Check if this might be a chapter start (simple heuristic)
-      // We'll consider segments with short text that might be titles as potential chapter starts
-      const isChapterStart = item.text.length < 30 && 
-                            !item.text.includes('segment') && 
-                            item.text !== 'N/A' &&
-                            (index === 0 || index % 10 === 0) // Just a heuristic
+        const baseDate = new Date(0);
+        baseDate.setHours(0, 0, 0, 0);
 
-      return {
-        start: format(startTime, 'HH:mm:ss'),
-        end: format(endTime, 'HH:mm:ss'),
-        text: item.text !== 'N/A' ? item.text : `Segment at ${formatTime(start)}`,
-        isChapterStart,
-      }
-    })
+        const startTime = addSeconds(baseDate, start);
+        const endTime = addSeconds(baseDate, end);
+
+        // Check if this might be a chapter start (simple heuristic)
+        const isChapterStart = item.text.length < 30 &&
+                              !item.text.includes('segment') &&
+                              item.text !== 'N/A' &&
+                              (index === 0 || index % 10 === 0); // Just a heuristic
+
+        return {
+          start: format(startTime, 'HH:mm:ss'),
+          end: format(endTime, 'HH:mm:ss'),
+          text: item.text || `Segment at ${formatTime(start)}`,
+          isChapterStart,
+        };
+      });
+    } else {
+      // Original API format: { content: [{ text, start, end }] }
+      segments = data.content.map((item: any, index: number) => {
+        // Convert start and end times from strings to numbers
+        const start = parseInt(item.start, 10) / 1000; // Convert milliseconds to seconds if needed
+        const end = parseInt(item.end, 10) / 1000; // Convert milliseconds to seconds if needed
+
+        const baseDate = new Date(0);
+        baseDate.setHours(0, 0, 0, 0);
+
+        const startTime = addSeconds(baseDate, Number(start));
+        const endTime = addSeconds(baseDate, Number(end));
+
+        // Check if this might be a chapter start (simple heuristic)
+        const isChapterStart = item.text.length < 30 &&
+                              !item.text.includes('segment') &&
+                              item.text !== 'N/A' &&
+                              (index === 0 || index % 10 === 0); // Just a heuristic
+
+        return {
+          start: format(startTime, 'HH:mm:ss'),
+          end: format(endTime, 'HH:mm:ss'),
+          text: item.text !== 'N/A' ? item.text : `Segment at ${formatTime(start)}`,
+          isChapterStart,
+        };
+      });
+    }
 
     await TranscriptRepository.upsertSegments(videoId, segments);
 

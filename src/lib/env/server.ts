@@ -6,6 +6,8 @@ export const env = createEnv({
   server: {
     API_BASE_URL: z.string().url(),
     API_X_HEADER_API_KEY: z.string().min(1),
+    TRANSCRIPT_API_BASE_URL: z.string().url().optional(),
+    TRANSCRIPT_API_KEY: z.string().min(1).optional(),
     NODE_ENV: z.string().min(1),
     DB_PASSWORD: z.string().min(1),
     DB_USER: z.string().min(1),
