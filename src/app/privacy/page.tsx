@@ -1,16 +1,16 @@
-import Typography from "@/components/common/typography"
-import MainLayout from "@/components/layouts/main-layout"
+import Typography from "@/components/common/typography";
+import MainLayout from "@/components/layouts/main-layout";
 
 export default function PrivacyPolicy() {
   const lastUpdated = new Date().toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
-  })
+  });
 
   const htmlContent = `
   <h2>Introduction</h2>
-  <p>Welcome to VidioPintar. We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our video processing service.</p>
+  <p>Welcome to YTCollege. We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our video processing service.</p>
 
   <h2>Information We Collect</h2>
   <p>We collect the following types of information:</p>
@@ -76,7 +76,7 @@ export default function PrivacyPolicy() {
     <li><strong>Data Portability:</strong> Request your data in a machine-readable format</li>
     <li><strong>Opt-out:</strong> Unsubscribe from marketing communications</li>
   </ul>
-  <p>To exercise these rights, please contact us at <a href="mailto:privacy@vidiopintar.com">privacy@vidiopintar.com</a></p>
+  <p>To exercise these rights, please contact us at <a href="mailto:privacy@ytcollege.net">privacy@ytcollege.net</a></p>
 
   <h2>Cookies and Tracking</h2>
   <p>We use cookies and similar tracking technologies to improve your experience on our platform:</p>
@@ -95,9 +95,9 @@ export default function PrivacyPolicy() {
 
   <h2>Contact Us</h2>
   <p>If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
-  <p> Email: <a href="mailto:support@vidiopintar.com">support@vidiopintar.com</a></p>
-  <p> Website: <a href="https://vidiopintar.com">vidiopintar.com</a></p>
-  `
+  <p> Email: <a href="mailto:support@ytcollege.net">support@ytcollege.net</a></p>
+  <p> Website: <a href="https://ytcollege.net">ytcollege.net</a></p>
+  `;
 
   return (
     <MainLayout>
@@ -108,7 +108,9 @@ export default function PrivacyPolicy() {
               <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl mb-8">
                 Privacy Policy
               </h1>
-              <p className="text-muted-foreground mb-12">Last updated: {lastUpdated}</p>
+              <p className="text-muted-foreground mb-12">
+                Last updated: {lastUpdated}
+              </p>
 
               <Typography html={htmlContent} />
             </div>
@@ -116,5 +118,5 @@ export default function PrivacyPolicy() {
         </div>
       </main>
     </MainLayout>
-  )
+  );
 }

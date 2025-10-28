@@ -1,12 +1,12 @@
-import Link from "next/link"
-import CallToAction from "../common/call-to-action"
+import Link from "next/link";
+import CallToAction from "../common/call-to-action";
 
 const footers = [
-  {
-    title: "Changelogs",
-    href: "/changelogs",
-    isExternal: false,
-  },
+  // {
+  //   title: "Changelogs",
+  //   href: "/changelogs",
+  //   isExternal: false,
+  // },
   {
     title: "Privacy",
     href: "/privacy",
@@ -17,17 +17,17 @@ const footers = [
     href: "/terms",
     isExternal: false,
   },
-  {
-    title: "Github",
-    href: "https://github.com/ahmadrosid/vidiopintar.com",
-    isExternal: true,
-  },
+  // {
+  //   title: "Github",
+  //   href: "https://github.com/ahmadrosid/vidiopintar.com",
+  //   isExternal: true,
+  // },
   {
     title: "Credits",
     href: "https://github.com/ahmadrosid/vidiopintar.com",
     isExternal: true,
   },
-]
+];
 
 export function Footer({ cta }: { cta?: boolean }) {
   return (
@@ -53,12 +53,15 @@ export function Footer({ cta }: { cta?: boolean }) {
 
         <div className="text-sm text-secondary-foreground">
           © {new Date().getFullYear()}{" "}
-          <Link href="/" className="hover:text-white transition-colors cursor-pointer">
-            vidiopintar
+          <Link
+            href="/"
+            className="hover:text-white transition-colors cursor-pointer"
+          >
+            ytcollege
           </Link>
           , All rights reserved
         </div>
       </div>
     </div>
-  )
+  );
 }

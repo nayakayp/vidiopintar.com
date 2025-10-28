@@ -20,6 +20,8 @@ export const env = createEnv({
     ADMIN_MASTER_EMAIL: z.string().email(),
     GOOGLE_GENERATIVE_AI_BASE_URL: z.string().min(1),
     GOOGLE_GENERATIVE_AI_API_KEY: z.string().min(1),
+    UMAMI_ANALYTIC_URL: z.string().min(1),
+    UMAMI_ANALYTIC_WEBSITE_ID: z.string().min(1),
   },
   emptyStringAsUndefined: true,
   experimental__runtimeEnv: process.env,

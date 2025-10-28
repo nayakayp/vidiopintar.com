@@ -19,7 +19,9 @@ interface SharedVideoPageProps {
   }>;
 }
 
-export async function generateMetadata(props: SharedVideoPageProps): Promise<Metadata> {
+export async function generateMetadata(
+  props: SharedVideoPageProps,
+): Promise<Metadata> {
   const params = await props.params;
   const { slug } = params;
 
@@ -32,11 +34,11 @@ export async function generateMetadata(props: SharedVideoPageProps): Promise<Met
   }
 
   return {
-    title: `Vidiopintar - ${sharedVideo.title}`,
-    description: sharedVideo.description || "Shared video from VidioPintar",
+    title: `YTCollege - ${sharedVideo.title}`,
+    description: sharedVideo.description || "Shared video from YTCollege",
     openGraph: {
       title: sharedVideo.title,
-      description: sharedVideo.description || "Shared video from VidioPintar",
+      description: sharedVideo.description || "Shared video from YTCollege",
       images: [{ url: sharedVideo.thumbnailUrl || "" }],
     },
   };
@@ -56,7 +58,10 @@ export default async function SharedVideoPage(props: SharedVideoPageProps) {
   }
 
   const transcript = await fetchVideoTranscript(sharedVideo.youtubeId);
-  const messages = await getChatHistory(sharedVideo.youtubeId, sharedVideo.userVideoId);
+  const messages = await getChatHistory(
+    sharedVideo.youtubeId,
+    sharedVideo.userVideoId,
+  );
 
   const quickStartQuestions: string[] = sharedVideo.quickStartQuestions || [];
 
@@ -67,11 +72,16 @@ export default async function SharedVideoPage(props: SharedVideoPageProps) {
           <div className="lg:col-span-4 h-full overflow-y-auto scrollbar-none relative">
             <div className="sticky top-0 z-50 bg-white dark:bg-black border-b">
               <div className="flex items-center p-4 gap-2">
-                <a href="/home" className="text-foreground hover:underline hover:text-melody transition-colors inline-flex gap-2 items-center">
+                <a
+                  href="/home"
+                  className="text-foreground hover:underline hover:text-melody transition-colors inline-flex gap-2 items-center"
+                >
                   Home
                 </a>
                 <ChevronRight className="size-5 text-muted-foreground" />
-                <h1 className="font-semibold tracking-tight flex-1 truncate">{sharedVideo.title}</h1>
+                <h1 className="font-semibold tracking-tight flex-1 truncate">
+                  {sharedVideo.title}
+                </h1>
               </div>
             </div>
             <VideoPlayer videoId={sharedVideo.youtubeId} />
@@ -86,10 +96,19 @@ export default async function SharedVideoPage(props: SharedVideoPageProps) {
                     <span className="flex items-center gap-2">Transcript</span>
                   </TabsTrigger>
                 </TabsList>
-                <TabsContent value="summary" className="h-full overflow-y-auto p-0 m-0">
-                  <SummarySection videoId={sharedVideo.youtubeId} initialSummary={sharedVideo.summary ?? ""} />
+                <TabsContent
+                  value="summary"
+                  className="h-full overflow-y-auto p-0 m-0"
+                >
+                  <SummarySection
+                    videoId={sharedVideo.youtubeId}
+                    initialSummary={sharedVideo.summary ?? ""}
+                  />
                 </TabsContent>
-                <TabsContent value="transcript" className="h-full overflow-y-auto p-0 m-0">
+                <TabsContent
+                  value="transcript"
+                  className="h-full overflow-y-auto p-0 m-0"
+                >
                   <TranscriptView transcript={transcript} />
                 </TabsContent>
               </Tabs>

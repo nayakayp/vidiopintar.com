@@ -1,0 +1,6 @@
+- [ ] @src/components/video/video-input-section.tsx (Line 28, untuk munculkan notif upgrade ke free user)
+- [ ] @src/lib/user-plan-service.ts (Line 13-14, untuk ganti limit dari free user)
+- [ ] @src/components/video/video-input-section.tsx (Line 30-49, untuk toggle antara submit atau search mode)
+- [ ] @src/app/profile/profile-sidebar.tsx (Line 33-37, untuk munculkan billing page)
+- [ ] @src/components/footer.tsx ()
+- [ ] @src/layout.tsx (Ganti tracking code)

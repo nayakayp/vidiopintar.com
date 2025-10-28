@@ -1,19 +1,19 @@
-import Typography from "@/components/common/typography"
-import MainLayout from "@/components/layouts/main-layout"
+import Typography from "@/components/common/typography";
+import MainLayout from "@/components/layouts/main-layout";
 
 export default function TermsOfService() {
   const lastUpdated = new Date().toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
-  })
+  });
 
   const htmlContent = `
     <h2>1. Acceptance of Terms</h2>
-    <p>By accessing and using VidioPintar ("the Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, please do not use our Service. We reserve the right to update these Terms at any time, and your continued use of the Service constitutes acceptance of any changes.</p>
+    <p>By accessing and using YTCollege ("the Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, please do not use our Service. We reserve the right to update these Terms at any time, and your continued use of the Service constitutes acceptance of any changes.</p>
 
     <h2>2. Description of Service</h2>
-    <p>VidioPintar provides an AI-powered video processing platform that offers:</p>
+    <p>YTCollege provides an AI-powered video processing platform that offers:</p>
     <ul>
       <li>Video transcription and caption generation</li>
       <li>Multi-language translation services</li>
@@ -56,7 +56,7 @@ export default function TermsOfService() {
       <li>Create backups for service reliability</li>
     </ul>
     <h4>Our Content</h4>
-    <p>The Service, including its design, features, and content (excluding user content), is owned by VidioPintar and protected by intellectual property laws. You may not copy, modify, or reverse engineer any part of our Service.</p>
+    <p>The Service, including its design, features, and content (excluding user content), is owned by YTCollege and protected by intellectual property laws. You may not copy, modify, or reverse engineer any part of our Service.</p>
 
     <h2>6. Payment and Billing</h2>
     <p>For premium features, you agree to:</p>
@@ -101,7 +101,7 @@ export default function TermsOfService() {
 
     <h2>10. Limitation of Liability</h2>       
     <p class="font-semibold uppercase">To the maximum extent permitted by law:</p>
-    <p>VidioPintar and its affiliates shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to:</p>
+    <p>YTCollege and its affiliates shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to:</p>
     <ul>
       <li>Loss of profits or revenue</li>
       <li>Loss of data or content</li>
@@ -111,7 +111,7 @@ export default function TermsOfService() {
     <p>Our total liability shall not exceed the amount paid by you to us in the 12 months preceding the claim.</p>
 
     <h2>11. Indemnification</h2>
-    <p>You agree to indemnify, defend, and hold harmless VidioPintar, its officers, directors, employees, and agents from any claims, damages, losses, liabilities, and expenses (including legal fees) arising from your use of the Service, violation of these Terms, or infringement of any third-party rights.</p>
+    <p>You agree to indemnify, defend, and hold harmless YTCollege, its officers, directors, employees, and agents from any claims, damages, losses, liabilities, and expenses (including legal fees) arising from your use of the Service, violation of these Terms, or infringement of any third-party rights.</p>
 
     <h2>12. Termination</h2>
     <p>Either party may terminate this agreement:</p>
@@ -135,7 +135,7 @@ export default function TermsOfService() {
     <h2>14. General Provisions</h2>
     <ul>
       <li><strong>Entire Agreement:</strong> These Terms constitute the entire
-        agreement between you and VidioPintar
+        agreement between you and YTCollege
       </li>
       <li><strong>Severability:</strong> If any provision is found invalid, the
         remaining provisions continue in full force
@@ -152,10 +152,10 @@ export default function TermsOfService() {
 
     <h2>15. Contact Information</h2>
     <p>For questions about these Terms of Service, please contact us:</p>
-    <p>Email: <a href="mailto:legal@vidiopintar.com">legal@vidiopintar.com</a></p>
-    <p>Website: <a href="https://vidiopintar.com">vidiopintar.com</a></p>
-    <p>Support: <a href="mailto:support@vidiopintar.com">support@vidiopintar.com</a></p>
-  `
+    <p>Email: <a href="mailto:legal@ytcollege.net">legal@ytcollege.net</a></p>
+    <p>Website: <a href="https://ytcollege.net">ytcollege.net</a></p>
+    <p>Support: <a href="mailto:support@ytcollege.net">support@ytcollege.net</a></p>
+  `;
 
   return (
     <MainLayout>
@@ -166,7 +166,9 @@ export default function TermsOfService() {
               <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl mb-8">
                 Terms of Service
               </h1>
-              <p className="text-muted-foreground mb-12">Last updated: {lastUpdated}</p>
+              <p className="text-muted-foreground mb-12">
+                Last updated: {lastUpdated}
+              </p>
 
               <Typography html={htmlContent} />
             </div>
@@ -174,5 +176,5 @@ export default function TermsOfService() {
         </div>
       </main>
     </MainLayout>
-  )
+  );
 }

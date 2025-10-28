@@ -65,7 +65,7 @@
           "basic": "Basic AI insights",
           "summaries": "Simple summaries",
           "community": "Community support",
-          "branding": "Vidiopintar branding"
+          "branding": "YTCollege branding"
         }
       },
       "monthly": {
@@ -98,14 +98,14 @@
     "subtitle": "Learn Any Topic, One Video at a Time."
   },
   "footer": {
-    "brand": "Vidiopintar",
+    "brand": "YTCollege",
     "links": {
       "changelog": "Changelog",
       "privacy": "Privacy",
       "terms": "Terms",
       "github": "Github"
     },
-    "copyright": "© {{year}} Vidiopintar, All rights reserved"
+    "copyright": "© {{year}} YTCollege, All rights reserved"
   },
   "common": {
     "submit": "Submit",
@@ -118,7 +118,7 @@
     "success": "Success"
   },
   "home": {
-    "title": "Vidiopintar",
+    "title": "YTCollege",
     "subtitle": "What do you want to learn today?",
     "chooseTopics": "Choose topics"
   },
@@ -296,3 +296,4 @@
     "chatWithVideo": "Chat with video"
   }
 }
+

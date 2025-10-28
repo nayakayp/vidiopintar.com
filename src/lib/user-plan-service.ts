@@ -10,8 +10,8 @@ export interface PlanLimits {
 
 const PLAN_LIMITS: Record<UserPlan, PlanLimits> = {
   free: {
-    videosPerDay: 100,
-    unlimited: false,
+    videosPerDay: -1, // unlimited
+    unlimited: true,
   },
   monthly: {
     videosPerDay: -1, // unlimited
@@ -267,4 +267,3 @@ export class UserPlanService {
     return { canPurchase: true };
   }
 }
-

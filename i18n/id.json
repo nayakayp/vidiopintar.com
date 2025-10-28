@@ -65,7 +65,7 @@
           "basic": "Wawasan AI dasar",
           "summaries": "Ringkasan sederhana",
           "community": "Dukungan komunitas",
-          "branding": "Branding Vidiopintar"
+          "branding": "Branding YTCollege"
         }
       },
       "monthly": {
@@ -98,14 +98,14 @@
     "subtitle": "Pelajari Topik Apa Pun, Satu Video dalam Satu Waktu."
   },
   "footer": {
-    "brand": "Vidiopintar",
+    "brand": "YTCollege",
     "links": {
       "changelog": "Changelog",
       "privacy": "Privasi",
       "terms": "Syarat & Ketentuan",
       "github": "Github"
     },
-    "copyright": "© {{year}} Vidiopintar, Semua hak dilindungi"
+    "copyright": "© {{year}} YTCollege, Semua hak dilindungi"
   },
   "common": {
     "submit": "Kirim",
@@ -118,7 +118,7 @@
     "success": "Berhasil"
   },
   "home": {
-    "title": "Vidiopintar",
+    "title": "YTCollege",
     "subtitle": "Apa yang ingin kamu pelajari hari ini?",
     "chooseTopics": "Pilih topik"
   },
@@ -296,3 +296,4 @@
     "chatWithVideo": "Chat dengan video"
   }
 }
+
