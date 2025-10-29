@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   vidiopintar-app:
     # build: .  # Uncomment this if you want to build locally
