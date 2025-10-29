@@ -15,6 +15,10 @@ export const TOKEN_PRICING = {
       input: 0.1, // $0.10 per 1M input tokens (updated - simplified pricing)
       output: 0.1, // $0.10 per 1M output tokens (simplified pricing - same rate)
     },
+    "gemini-2.0-flash-lite": {
+      input: 0.075, // $1.25 per 1M input tokens (estimated)
+      output: 0.3, // $5.00 per 1M output tokens (estimated)
+    },
     "gemini-2.5-flash": {
       input: 0.3, // $0.075 per 1M input tokens (estimated)
       output: 2.5, // $0.15 per 1M output tokens (estimated)
@@ -54,4 +58,3 @@ export function calculateTokenCost(
     totalCost: Math.round(totalCost * 1_000_000) / 1_000_000,
   };
 }
-
