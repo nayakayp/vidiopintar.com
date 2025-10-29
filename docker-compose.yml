@@ -1,0 +1,14 @@
+services:
+  vidiopintar-app:
+    # build: .  # Uncomment this if you want to build locally
+    image: ghcr.io/nayakayp/vidiopintar-app:latest
+    container_name: vidiopintar-app
+    ports:
+      - "5000:3000"
+    env_file:
+      - .env
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
