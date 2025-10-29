@@ -4,6 +4,7 @@ services:
   vidiopintar-app:
     # build: .  # Uncomment this if you want to build locally
     image: ghcr.io/nayakayp/vidiopintar-app:latest
+    pull_policy: always
     container_name: vidiopintar-app
     ports:
       - "5000:3000"
