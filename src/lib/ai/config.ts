@@ -9,10 +9,9 @@ export const googleAI = createGoogleGenerativeAI({
 // Model configurations
 export const AI_MODELS = {
   // Low-end model for general use
-  lite: "gemini-2.5-flash",
+  lite: env.GEMINI_LOW_END_MODEL,
   // High-end model for complex tasks
-  pro: "gemini-2.5-pro",
+  pro: env.GEMINI_HIGH_END_MODEL,
 } as const;
 
 export type AIModelType = keyof typeof AI_MODELS;
-

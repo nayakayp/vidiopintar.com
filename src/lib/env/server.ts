@@ -22,6 +22,8 @@ export const env = createEnv({
     GOOGLE_GENERATIVE_AI_API_KEY: z.string().min(1),
     UMAMI_ANALYTIC_URL: z.string().min(1),
     UMAMI_ANALYTIC_WEBSITE_ID: z.string().min(1),
+    GEMINI_LOW_END_MODEL: z.string().min(1),
+    GEMINI_HIGH_END_MODEL: z.string().min(1),
   },
   emptyStringAsUndefined: true,
   experimental__runtimeEnv: process.env,
